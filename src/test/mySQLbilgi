@@ -1,0 +1,22 @@
+Oracle
+SQLite
+MySql
+MsAccess
+
+
+SQL  -> Structure Query Language
+
+Türkçe -> ülkeler dosyasından bütün ülke bilgilerini seç
+İngilizce-> SELECT * from ulkeler -> SQL dili -> Database konuşma dili
+
+Testerın hareket mantığı ne idi?
+Manuel Testing  -> MySql Workbench
+Automation Testing -> Cucumber (JDBC)sql de denir
+
+
+kurulum...
+https://telegra.ph/Install-MySQL-Workbench-09-08
+
+Portal 33306
+
+https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
