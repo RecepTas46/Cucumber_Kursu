@@ -5,6 +5,7 @@ import Pages.LeftNav;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class _02_CountrySteps {
 
@@ -20,9 +21,11 @@ public class _02_CountrySteps {
 
     @When("^Create a country$")
     public void create_a_country() {
+        String randomGenName= RandomStringUtils.randomAlphabetic(8);//jenkis icin hata olusmamasi adina random yapildi
+        String randomGenCode= RandomStringUtils.randomAlphabetic(4);
         dc.findAndClick("addButton");
-        dc.findAndSend("nameInput","recep001");
-        dc.findAndSend("codeInput","code3");
+        dc.findAndSend("nameInput",randomGenName);
+        dc.findAndSend("codeInput",randomGenCode);
         dc.findAndClick("saveButton");
     }
 
