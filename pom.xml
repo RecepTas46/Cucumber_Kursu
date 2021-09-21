@@ -144,7 +144,7 @@
         </profile>
 
         <profile>
-            <id>Regression_yeni</id>
+            <id>Regression_yeni</id>  <!-- burayi jenkis hedefte yazacagiz(clean test-P Regression_yeni)-->
             <build>
                 <plugins>
                     <plugin>

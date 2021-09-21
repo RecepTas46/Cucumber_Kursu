@@ -24,8 +24,7 @@ public class BaseDriver {
 
         // XML den gelmeyen tarayıcı adı ile çalışan scenario lar için
         // default setleme yapıldı
-        if (threadBrowserName.get() == null)
-        {
+        if (threadBrowserName.get() == null) {
             threadBrowserName.set("chrome");
         }
 
@@ -35,16 +34,19 @@ public class BaseDriver {
             switch (threadBrowserName.get()) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400"); //width, height
-                    threadDriver.set( new ChromeDriver(options) );//jenkis icin eklendi,normal calismalrda bu uc satir yoruma alinmali,alttaki satir yorumdan cikarilmali
+                    if (!runningFromIntelliJ()) {
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400"); //width, height
+                        threadDriver.set(new ChromeDriver(options));//jenkis icin eklendi,normal calismalrda bu uc satir yoruma alinmali,alttaki satir yorumdan cikarilmali
 
-                   // threadDriver.set( new ChromeDriver() );
+                    } else {
+                        threadDriver.set(new ChromeDriver());
+                    }
                     break;
 
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
-                    threadDriver.set( new FirefoxDriver());
+                    threadDriver.set(new FirefoxDriver());
                     break;
             }
         }
@@ -59,9 +61,13 @@ public class BaseDriver {
         if (threadDriver.get() != null) {
             threadDriver.get().quit();
             WebDriver driver = threadDriver.get();
-            driver =null;
+            driver = null;
             threadDriver.set(driver);
         }
     }
 
+    public static boolean runningFromIntelliJ() {//bunu ekleyerek jenkis haricinde browser normal calisacak hale geldi
+        String classPath = System.getProperty("java.class.path");
+        return classPath.contains("idea_rt.jar");
+    }
 }
