@@ -102,7 +102,7 @@
 
     </dependencies>
     <build>
-        <plugins>
+        <plugins>    <!--bu bölüm jenkis icin eklendi  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -112,6 +112,7 @@
                     <includes>
                         <!-- for  run class or classes  **/:bulunduğu lokasyonu bütün klasörlere göre bulabiliyor   -->
                         <include>**/_03_TestRunnerSmoke.java</include>
+                        <!-- istenilen kadar include eklenebilir-->
                     </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
@@ -119,5 +120,52 @@
 
         </plugins>
     </build>
+
+    <profiles>  <!-- burdan  asagisini istedigimiz runner classi calistirmak icin ekledik,eger biz belirtmezsek yukardaki kisim calisacak-->
+
+        <profile>
+            <id>Smoke_yeni</id> <!-- istenilen isim verilebilir-->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M1</version>
+                        <configuration>
+                            <includes>
+                                <!-- for  run class or classes-->
+                                <include>**/_03_TestRunnerSmoke.java</include>
+                            </includes>
+                            <testFailureIgnore>true</testFailureIgnore>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>Regression_yeni</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M1</version>
+                        <configuration>
+                            <includes>
+                                <!-- for  run class or classes-->
+                                <include>**/_05_TestRunnerRegressionWithPlugin.java</include>
+                                <!-- istenilen kadar include eklenebilir-->
+                            </includes>
+                            <testFailureIgnore>true</testFailureIgnore>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+
+    </profiles>
 
 </project>
